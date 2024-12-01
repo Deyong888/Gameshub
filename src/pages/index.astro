@@ -1,0 +1,23 @@
+---
+import Container from "@components/container.astro";
+import Layout from "@layouts/Layout.astro";
+import Gameplay from '../components/Gameplay.astro';
+import Features from "../components/features.astro";
+import HowToPlay from "../components/howtoplay.astro";
+import SocialShare from "../components/SocialShare.astro";
+import Faq from "../components/FAQ.astro";
+import Videos from "../components/Videos.astro";
+
+const locale = Astro.currentLocale || 'en';
+---
+
+<Layout title="Sprunki Game">
+  <Container>
+    <Gameplay locale={locale} />
+    <SocialShare locale={locale} />
+    <Videos locale={locale} />
+    <HowToPlay locale={locale} />
+    <Features locale={locale}/>
+    <Faq locale={locale} />
+  </Container>
+</Layout>

@@ -1,0 +1,250 @@
+---
+import { Fragment } from 'astro:components';
+
+// 定义图标组件
+const icons = {
+  "musical-note": `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" /></svg>`,
+  
+  "characters": `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>`,
+  
+  "mixing-desk": `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>`,
+  
+  "creativity": `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>`,
+  
+  "share": `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>`,
+  
+  "update": `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>`
+};
+
+const { locale = 'en' } = Astro.props;
+
+const translations = {
+  en: {
+    heading: "Discover the Magic of Incredibox - Sprunki: Where Music Meets Creativity",
+    subheading: "Transform into a music maestro with Sprunki's unique blend of rhythm, creativity, and fun. Create captivating beats, mix enchanting melodies, and share your musical masterpieces with players worldwide!",
+    features: [
+      {
+        title: "Intuitive Music Creation",
+        description: "Drag and drop sound icons onto characters to create music - no musical experience needed! Simple, fun, and instantly rewarding.",
+        icon: "musical-note"
+      },
+      {
+        title: "Unique Character Ensemble",
+        description: "Choose from a diverse cast of Sprunki characters, each bringing their own musical elements from beats to melodies and effects.",
+        icon: "characters"
+      },
+      {
+        title: "Dynamic Sound Mixing",
+        description: "Experiment with endless combinations of sounds, unlock special animations, and discover hidden musical surprises.",
+        icon: "mixing-desk"
+      },
+      {
+        title: "Creative Freedom",
+        description: "Build your compositions layer by layer, mix different musical styles, and create your unique sonic masterpiece.",
+        icon: "creativity"
+      },
+      {
+        title: "Share & Connect",
+        description: "Save your musical creations, share them with the community, and discover compositions from players worldwide.",
+        icon: "share"
+      },
+      {
+        title: "Regular Updates",
+        description: "Enjoy fresh content with new characters, sounds, and special combinations added regularly to keep your creativity flowing.",
+        icon: "update"
+      }
+    ]
+  },
+  zh: {
+    heading: "探索 Incredibox - Sprunki：音乐与创意的完美融合",
+    subheading: "通过 Sprunki 独特的节奏、创意和趣味组合，成为音乐大师。创作迷人节拍，混音魔法旋律，与全球玩家分享你的音乐杰作！",
+    features: [
+      {
+        title: "直观的音乐创作",
+        description: "将音效图标拖放到角色上即可创作音乐 - 无需音乐经验！简单、有趣、即时反馈。",
+        icon: "musical-note"
+      },
+      {
+        title: "独特角色阵容",
+        description: "从多样化的 Sprunki 角色中选择，每个角色都带来独特的音乐元素，从节奏到旋律再到音效。",
+        icon: "characters"
+      },
+      {
+        title: "动态混音系统",
+        description: "尝试无限声音组合，解锁特殊动画，发现隐藏的音乐惊喜。",
+        icon: "mixing-desk"
+      },
+      {
+        title: "创作自由",
+        description: "逐层构建你的作品，混合不同音乐风格，创造独一无二的声音杰作。",
+        icon: "creativity"
+      },
+      {
+        title: "分享与连接",
+        description: "保存你的音乐创作，与社区分享，发现来自全球玩家的作品。",
+        icon: "share"
+      },
+      {
+        title: "定期更新",
+        description: "定期推出新角色、新音效和特殊组合，持续激发你的创造力。",
+        icon: "update"
+      }
+    ]
+  },
+  es: {
+    heading: "Descubre la Magia de Incredibox - Sprunki: Donde la Música se Une con la Creatividad",
+    subheading: "Conviértete en un maestro musical con la única mezcla de ritmo, creatividad y diversión de Sprunki. ¡Crea ritmos cautivadores, mezcla melodías encantadoras y comparte tus obras maestras musicales con jugadores de todo el mundo!",
+    features: [
+      {
+        title: "Creación Musical Intuitiva",
+        description: "Arrastra y suelta iconos de sonido en los personajes para crear música - ¡sin experiencia musical necesaria! Simple, divertido y gratificante al instante.",
+        icon: "musical-note"
+      },
+      {
+        title: "Elenco Único de Personajes",
+        description: "Elige entre un diverso elenco de personajes Sprunki, cada uno aportando sus propios elementos musicales, desde ritmos hasta melodías y efectos.",
+        icon: "characters"
+      },
+      {
+        title: "Mezcla Dinámica de Sonidos",
+        description: "Experimenta con infinitas combinaciones de sonidos, desbloquea animaciones especiales y descubre sorpresas musicales ocultas.",
+        icon: "mixing-desk"
+      },
+      {
+        title: "Libertad Creativa",
+        description: "Construye tus composiciones capa por capa, mezcla diferentes estilos musicales y crea tu obra maestra sonora única.",
+        icon: "creativity"
+      },
+      {
+        title: "Comparte y Conéctate",
+        description: "Guarda tus creaciones musicales, compártelas con la comunidad y descubre composiciones de jugadores de todo el mundo.",
+        icon: "share"
+      },
+      {
+        title: "Actualizaciones Regulares",
+        description: "Disfruta de contenido fresco con nuevos personajes, sonidos y combinaciones especiales agregados regularmente para mantener fluyendo tu creatividad.",
+        icon: "update"
+      }
+    ]
+  }
+};
+
+const t = translations[locale] || translations.en;
+---
+
+<div class="features-container">
+  <h2 class="heading-gradient">
+    {t.heading}
+  </h2>
+  <p class="subheading">
+    {t.subheading}
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 md:px-8">
+    {t.features.map((feature) => (
+      <div class="feature-card">
+        <div class="icon-container" set:html={icons[feature.icon]} />
+        <h3 class="text-xl font-bold mb-2">
+          {feature.title}
+        </h3>
+        <p>
+          {feature.description}
+        </p>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .features-container {
+    background: linear-gradient(135deg, rgba(255, 97, 216, 0.1), rgba(107, 72, 255, 0.1));
+    padding: 4rem 0;
+    border-radius: 24px;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* 移除音符背景图案，改用 CSS 渐变 */
+  .features-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 97, 216, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(107, 72, 255, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .feature-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 97, 216, 0.1);
+  }
+
+  .feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(107, 72, 255, 0.15);
+  }
+
+  .icon-container {
+    background: linear-gradient(45deg, #FF61D8, #6B48FF);
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .heading-gradient {
+    background: linear-gradient(to right, #FF61D8, #6B48FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .subheading {
+    color: #6B48FF;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem auto;
+    line-height: 1.6;
+    font-size: 1.1rem;
+  }
+
+  .feature-card h3 {
+    color: #FF61D8;
+    font-weight: bold;
+  }
+
+  .feature-card p {
+    color: #6B48FF;
+    line-height: 1.6;
+  }
+
+  .icon-container svg {
+    color: white;
+    width: 2rem;
+    height: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .heading-gradient {
+      font-size: 2rem;
+    }
+
+    .subheading {
+      font-size: 1rem;
+      padding: 0 1rem;
+    }
+  }
+</style>

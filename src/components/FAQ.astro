@@ -1,0 +1,272 @@
+---
+const { locale = 'en' } = Astro.props;
+
+const translations = {
+  zh: {
+    title: "常见问题",
+    description: "关于 Sprunki 音乐游戏的常见问题解答",
+    questions: [
+      {
+        question: "Sprunki 是什么类型的游戏？",
+        answer: "Sprunki 是一款创意音乐游戏，你可以通过组合不同的角色来创作独特的音乐。每个角色都有自己独特的声音，从节奏、和声到旋律，让你成为音乐创作大师。"
+      },
+      {
+        question: "如何开始创作音乐？",
+        answer: "游戏非常简单直观！只需要将音效图标拖放到角色身上，他们就会开始演奏。你可以自由组合不同的声音，创造出独特的音乐作品。无需任何音乐基础，人人都能轻松上手。"
+      },
+      {
+        question: "有哪些特殊功能？",
+        answer: "游戏包含多种特色功能：解锁特殊动画效果、保存你的创作、分享作品到社交媒体、发现其他玩家的作品等。某些特定的声音组合还会触发独特的视觉效果！"
+      },
+      {
+        question: "如何保存我的作品？",
+        answer: "点击保存按钮即可将你的音乐作品保存下来。你可以为作品命名，随时回听，或者与其他玩家分享。所有保存的作品都可以在你的个人作品集中找到。"
+      },
+      {
+        question: "支持哪些设备？",
+        answer: "Sprunki 完全支持电脑、手机和平板等各种设备。你可以在任何设备上通过浏览器访问游戏，享受流畅的创作体验。触屏设备上的操作更加直观！"
+      },
+      {
+        question: "如何获得更多创作灵感？",
+        answer: "你可以在社区中探索其他玩家的作品获取灵感，或者查看我们定期更新的创作提示和教程。我们也会不定期推出新角色和新音效，带来更多创作可能。"
+      }
+    ]
+  },
+  en: {
+    title: "Frequently Asked Questions",
+    description: "Common questions about Sprunki Music Game",
+    questions: [
+      {
+        question: "What type of game is Sprunki?",
+        answer: "Sprunki is a creative music game where you can compose unique music by combining different characters. Each character brings their own unique sounds, from rhythms and harmonies to melodies, making you a music creation master."
+      },
+      {
+        question: "How do I start making music?",
+        answer: "It's super intuitive! Simply drag and drop sound icons onto characters to make them perform. You can freely combine different sounds to create your unique musical pieces. No musical experience needed - anyone can start creating!"
+      },
+      {
+        question: "What special features are there?",
+        answer: "The game includes various features: unlocking special animations, saving your creations, sharing works on social media, discovering other players' compositions, and more. Certain sound combinations even trigger unique visual effects!"
+      },
+      {
+        question: "How can I save my compositions?",
+        answer: "Just click the save button to store your musical creation. You can name your piece, replay it anytime, or share it with other players. All saved works can be found in your personal portfolio."
+      },
+      {
+        question: "What devices are supported?",
+        answer: "Sprunki fully supports computers, phones, and tablets. You can access the game through any browser and enjoy a smooth creative experience. Touch screen devices offer even more intuitive controls!"
+      },
+      {
+        question: "How can I get more creative inspiration?",
+        answer: "You can explore other players' works in the community for inspiration, or check out our regularly updated creation tips and tutorials. We also periodically introduce new characters and sound effects for more creative possibilities."
+      }
+    ]
+  },
+  es: {
+    title: "Preguntas Frecuentes",
+    description: "Preguntas comunes sobre el juego musical Sprunki",
+    questions: [
+      {
+        question: "¿Qué tipo de juego es Sprunki?",
+        answer: "Sprunki es un juego musical creativo donde puedes componer música única combinando diferentes personajes. Cada personaje aporta sus propios sonidos únicos, desde ritmos y armonías hasta melodías, convirtiéndote en un maestro de la creación musical."
+      },
+      {
+        question: "¿Cómo empiezo a crear música?",
+        answer: "¡Es super intuitivo! Simplemente arrastra y suelta iconos de sonido sobre los personajes para hacerlos tocar. Puedes combinar libremente diferentes sonidos para crear tus piezas musicales únicas. ¡No se necesita experiencia musical, cualquiera puede empezar a crear!"
+      },
+      {
+        question: "¿Qué características especiales hay?",
+        answer: "El juego incluye varias características: desbloquear animaciones especiales, guardar tus creaciones, compartir trabajos en redes sociales, descubrir composiciones de otros jugadores y más. ¡Ciertas combinaciones de sonidos incluso activan efectos visuales únicos!"
+      },
+      {
+        question: "¿Cómo puedo guardar mis composiciones?",
+        answer: "Solo haz clic en el botón de guardar para almacenar tu creación musical. Puedes nombrar tu pieza, reproducirla en cualquier momento o compartirla con otros jugadores. Todos los trabajos guardados se pueden encontrar en tu portafolio personal."
+      },
+      {
+        question: "¿Qué dispositivos son compatibles?",
+        answer: "Sprunki es totalmente compatible con computadoras, teléfonos y tabletas. Puedes acceder al juego a través de cualquier navegador y disfrutar de una experiencia creativa fluida. ¡Los dispositivos con pantalla táctil ofrecen controles aún más intuitivos!"
+      },
+      {
+        question: "¿Cómo puedo obtener más inspiración creativa?",
+        answer: "Puedes explorar los trabajos de otros jugadores en la comunidad para inspirarte, o consultar nuestros consejos y tutoriales de creación actualizados regularmente. También introducimos periódicamente nuevos personajes y efectos de sonido para más posibilidades creativas."
+      }
+    ]
+  }
+};
+
+const t = translations[locale] || translations.en;
+---
+
+<section class="faq">
+  <div class="container mx-auto px-4 max-w-4xl">
+    <div class="text-center mb-12">
+      <h2 class="heading-gradient">
+        {t.title}
+      </h2>
+      <p class="subheading">{t.description}</p>
+    </div>
+
+    <div class="space-y-4">
+      {t.questions.map((item, index) => (
+        <div class="faq-item">
+          <button
+            class="faq-question"
+            aria-expanded="false"
+            aria-controls={`faq-answer-${index}`}>
+            <span>{item.question}</span>
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+          <div
+            id={`faq-answer-${index}`}
+            class="faq-answer">
+            <p>{item.answer}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    background: linear-gradient(135deg, rgba(255, 97, 216, 0.1), rgba(107, 72, 255, 0.1));
+    padding: 4rem 0;
+    border-radius: 24px;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .heading-gradient {
+    background: linear-gradient(to right, #FF61D8, #6B48FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .subheading {
+    color: #6B48FF;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem auto;
+    line-height: 1.6;
+    font-size: 1.1rem;
+  }
+
+  .faq-item {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    margin-bottom: 1rem;
+    border: 2px solid rgba(255, 97, 216, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .faq-item:hover {
+    transform: translateX(4px);
+    box-shadow: 0 15px 30px rgba(107, 72, 255, 0.15);
+  }
+
+  .faq-question {
+    width: 100%;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #FF61D8;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-align: left;
+    transition: all 0.3s ease;
+  }
+
+  .faq-question:hover {
+    background: linear-gradient(135deg, rgba(255, 97, 216, 0.1), rgba(107, 72, 255, 0.1));
+  }
+
+  .faq-question svg {
+    color: #FF61D8;
+    transition: transform 0.3s ease;
+  }
+
+  .faq-question[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    padding: 0 1.5rem;
+  }
+
+  .faq-answer p {
+    color: #6B48FF;
+    line-height: 1.6;
+    padding-bottom: 1.5rem;
+  }
+
+  .faq-question[aria-expanded="true"] + .faq-answer {
+    height: auto;
+  }
+
+  @media (max-width: 768px) {
+    .heading-gradient {
+      font-size: 2rem;
+    }
+
+    .subheading {
+      font-size: 1rem;
+      padding: 0 1rem;
+    }
+
+    .faq-question {
+      font-size: 1rem;
+      padding: 1.25rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    faqQuestions.forEach(question => {
+      question.addEventListener('click', () => {
+        const isExpanded = question.getAttribute('aria-expanded') === 'true';
+        const answer = question.nextElementSibling;
+        
+        // 关闭其他所有答案
+        faqQuestions.forEach(q => {
+          if (q !== question) {
+            q.setAttribute('aria-expanded', 'false');
+            q.nextElementSibling.style.height = '0';
+          }
+        });
+
+        // 切换当前答案
+        question.setAttribute('aria-expanded', !isExpanded);
+        if (!isExpanded) {
+          const height = answer.scrollHeight;
+          answer.style.height = `${height}px`;
+        } else {
+          answer.style.height = '0';
+        }
+      });
+    });
+  });
+</script> 

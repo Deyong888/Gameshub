@@ -1,0 +1,336 @@
+---
+// 导入图片
+import dropImg from '../assets/howtoplay/drop.png';
+import mergeImg from '../assets/howtoplay/merge.png';
+import stackImg from '../assets/howtoplay/stack.png';
+import warningImg from '../assets/howtoplay/warning.png';
+import tipImg from '../assets/howtoplay/tip.png';
+import { Image } from 'astro:assets';
+
+const { locale = 'en' } = Astro.props;
+
+const translations = {
+  en: {
+    title: "How to Play Sprunki",
+    description: "Create your unique musical masterpiece with the Sprunki crew!",
+    steps: [
+      {
+        title: "Choose Characters",
+        description: "Select from our colorful Sprunki characters. Each one brings unique sounds - from catchy beats to melodic tunes!",
+        image: dropImg
+      },
+      {
+        title: "Mix & Match",
+        description: "Drag sound icons onto characters to create your mix. Watch them come alive with animations as they perform!",
+        image: mergeImg
+      },
+      {
+        title: "Discover Combos",
+        description: "Experiment with different sound combinations to unlock special animations and create amazing musical pieces.",
+        image: stackImg
+      },
+      {
+        title: "Share & Connect",
+        description: "Save your musical creations and share them with the Sprunki community. Get inspired and inspire others!",
+        image: warningImg
+      }
+    ],
+    tips: {
+      title: "Pro Tips",
+      items: [
+        "Try combining different character sounds for unique effects",
+        "Watch for special animation triggers",
+        "Layer sounds gradually to build your composition",
+        "Save multiple versions of your favorite mixes"
+      ]
+    }
+  },
+  zh: {
+    title: "玩转 Sprunki",
+    description: "和 Sprunki 小伙伴一起创作你的音乐杰作！",
+    steps: [
+      {
+        title: "选择角色",
+        description: "从缤纷的 Sprunki 角色中选择你的音乐伙伴。每个角色都带来独特的声音 - 从节奏到旋律！",
+        image: dropImg
+      },
+      {
+        title: "混音搭配",
+        description: "将音效图标拖放到角色上进行创作。看着他们随着音乐活力演出！",
+        image: mergeImg
+      },
+      {
+        title: "探索组合",
+        description: "尝试不同的声音组合来解锁特殊动画，创作精彩的音乐作品。",
+        image: stackImg
+      },
+      {
+        title: "分享互动",
+        description: "保存你的音乐作品，与 Sprunki 社区分享。获得灵感，激发创意！",
+        image: warningImg
+      }
+    ],
+    tips: {
+      title: "创作技巧",
+      items: [
+        "尝试组合不同角色的声音创造独特效果",
+        "留意特殊动画的触发条件",
+        "循序渐进地叠加声音构建作品",
+        "保存多个版本的创作作品"
+      ]
+    }
+  },
+  es: {
+    title: "Cómo Jugar Sprunki",
+    description: "¡Crea tu obra maestra musical con el equipo Sprunki!",
+    steps: [
+      {
+        title: "Elige Personajes",
+        description: "Selecciona entre los coloridos personajes Sprunki. ¡Cada uno aporta sonidos únicos, desde ritmos hasta melodías!",
+        image: dropImg
+      },
+      {
+        title: "Mezcla y Combina",
+        description: "Arrastra los iconos de sonido a los personajes para crear tu mezcla. ¡Míralos cobrar vida con animaciones!",
+        image: mergeImg
+      },
+      {
+        title: "Descubre Combinaciones",
+        description: "Experimenta con diferentes combinaciones de sonidos para desbloquear animaciones especiales y crear piezas musicales increíbles.",
+        image: stackImg
+      },
+      {
+        title: "Comparte y Conecta",
+        description: "Guarda tus creaciones musicales y compártelas con la comunidad Sprunki. ¡Inspírate e inspira a otros!",
+        image: warningImg
+      }
+    ],
+    tips: {
+      title: "Consejos Pro",
+      items: [
+        "Combina sonidos de diferentes personajes para efectos únicos",
+        "Busca activadores de animaciones especiales",
+        "Construye tu composición gradualmente",
+        "Guarda múltiples versiones de tus mezclas favoritas"
+      ]
+    }
+  }
+};
+
+const t = translations[locale] || translations.en;
+---
+
+<section class="how-to-play">
+  <div class="container mx-auto px-4 max-w-6xl">
+    <!-- 标题部分 -->
+    <div class="text-center mb-16">
+      <h2 class="heading-gradient">
+        {t.title}
+      </h2>
+      <p class="subheading">
+        {t.description}
+      </p>
+    </div>
+
+    <!-- 步骤卡片 -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+      {t.steps.map((step, index) => (
+        <div class="step-card">
+          <div class="relative mb-6">
+            <div class="step-number">
+              {index + 1}
+            </div>
+            <div class="image-container">
+              <Image 
+                src={step.image} 
+                alt={step.title}
+                class="w-16 h-16 object-contain"
+                width="96"
+                height="96"
+              />
+            </div>
+          </div>
+          <h3>{step.title}</h3>
+          <p>{step.description}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- 技巧部分 -->
+    <div class="tips-wrapper">
+      <div class="tips-container">
+        <h3 class="heading-gradient">
+          {t.tips.title}
+        </h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          {t.tips.items.map((tip, index) => (
+            <div class="tip-item">
+              <div class="tip-icon">
+                <Image 
+                  src={tipImg}
+                  alt="tip"
+                  class="w-6 h-6"
+                  width="24"
+                  height="24"
+                />
+              </div>
+              <div class="tip-content">
+                <p>
+                  <span class="tip-number"> {index + 1}:</span> {tip}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .how-to-play {
+    background: linear-gradient(135deg, rgba(255, 97, 216, 0.1), rgba(107, 72, 255, 0.1));
+    padding: 4rem 0;
+    border-radius: 24px;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .heading-gradient {
+    background: linear-gradient(to right, #FF61D8, #6B48FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .subheading {
+    color: #6B48FF;
+    font-size: 1.2rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .step-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 97, 216, 0.1);
+  }
+
+  .step-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(107, 72, 255, 0.15);
+  }
+
+  .step-number {
+    position: absolute;
+    top: -1rem;
+    left: -1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: linear-gradient(45deg, #FF61D8, #6B48FF);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+  .image-container {
+    background: linear-gradient(135deg, rgba(255, 97, 216, 0.1), rgba(107, 72, 255, 0.1));
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .step-card h3 {
+    color: #FF61D8;
+    font-weight: bold;
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .step-card p {
+    color: #6B48FF;
+    line-height: 1.6;
+  }
+
+  .tips-wrapper {
+    background: linear-gradient(45deg, #FF61D8, #6B48FF);
+    padding: 2px;
+    border-radius: 16px;
+  }
+
+  .tips-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 2rem;
+  }
+
+  .tip-item {
+    display: flex;
+    gap: 1rem;
+    align-items: start;
+    padding: 1rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, rgba(255, 97, 216, 0.05), rgba(107, 72, 255, 0.05));
+  }
+
+  .tip-item:hover {
+    background: linear-gradient(135deg, rgba(255, 97, 216, 0.1), rgba(107, 72, 255, 0.1));
+  }
+
+  .tip-icon {
+    background: linear-gradient(45deg, #FF61D8, #6B48FF);
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .tip-icon img {
+    filter: brightness(0) invert(1);
+  }
+
+  .tip-number {
+    color: #FF61D8;
+    font-weight: bold;
+  }
+
+  .tip-content p {
+    color: #6B48FF;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .heading-gradient {
+      font-size: 2rem;
+    }
+
+    .subheading {
+      font-size: 1rem;
+      padding: 0 1rem;
+    }
+
+    .step-card {
+      padding: 1.25rem;
+    }
+  }
+</style> 
